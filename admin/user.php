@@ -53,9 +53,9 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="card">
-                                    <div class="card-header">Data User</div>
+                                    <div class="card-header bg-secondary text-white mb-4">Data User</div>
                                     <div class="card-body">
-                                        <div class="table table-bordered">
+                                        <table class="table table-bordered">
                                             <thead>
                                                 <tr>
                                                     <th>No</th>
@@ -72,7 +72,7 @@
                                                     <td></td>
                                                 </tr>
                                             </tbody>
-                                        </div>
+                                        </table>
                                     </div>
                                 </div>
 
