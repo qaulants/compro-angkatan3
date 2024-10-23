@@ -1,3 +1,19 @@
+<?php
+session_start();
+include 'koneksi.php';
+// memunculkan /pilih sebuah atau semua kolom dari table user
+$queryUser = mysqli_query($koneksi, "SELECT * FROM user");
+//mysqli_fetch_assoc , untuk menghasilkan hasil query menjadi sebuah data (object, arrray)
+
+// jika parameter ada ?delete=nilai param
+if (isset($_GET['delete'])) {
+    $id = $_GET['delete']; //mengambil nilai param
+
+    $delete = mysqli_query($koneksi, "DELETE FROM user WHERE id ='$id'");
+    header("location:user.php?hapus=berhasil");
+}
+
+?>
 <!DOCTYPE html>
 
 <!-- =========================================================
@@ -55,6 +71,14 @@
                                 <div class="card">
                                     <div class="card-header bg-secondary text-white mb-4">Data User</div>
                                     <div class="card-body">
+                                        <?php if (isset($_GET['hapus'])): ?>
+                                            <div class="alert alert-success" role="alert">
+                                                Data berhasil dihapus
+                                            </div>
+                                        <?php endif ?>
+                                        <div align="right" class="mb-3">
+                                            <a href="tambah-user.php" class="btn btn-primary"> Tambah</a>
+                                        </div>
                                         <table class="table table-bordered">
                                             <thead>
                                                 <tr>
@@ -65,12 +89,22 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                </tr>
+                                                <?php $no = 1;
+                                                while ($rowUser = mysqli_fetch_assoc($queryUser)): ?>
+                                                    <tr>
+                                                        <td><?php echo $no++ ?></td>
+                                                        <td><?php echo $rowUser['nama'] ?></td>
+                                                        <td><?php echo $rowUser['email'] ?></td>
+                                                        <td>
+                                                            <a href="tambah-user.php?edit=<?php echo $rowUser['id'] ?>" class="btn btn-success btn-sm">
+                                                                <span class="tf-icon bx bx-pencil"></span>
+                                                            </a>
+                                                            <a onclick="return confirm('Apakah Anda yakin akan menghapus data ini?????')" href="user.php?delete=<?php echo $rowUser['id'] ?>" class="btn btn-danger btn-sm">
+                                                                <span class="tf-icon bx bx-trash"></span>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                <?php endwhile ?>
                                             </tbody>
                                         </table>
                                     </div>
@@ -78,7 +112,7 @@
 
                             </div>
                         </div>
-                        
+
                     </div>
                     <!-- / Content -->
 
