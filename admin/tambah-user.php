@@ -1,4 +1,5 @@
 <?php
+session_start();
 include 'koneksi.php';
 //jika button simpan ditekan
 if(isset($_POST['simpan'])){
