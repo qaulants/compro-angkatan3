@@ -15,7 +15,7 @@ if(isset($_POST['simpan'])){
         $ukuran_foto = $_FILES['foto']['size'];
 
         // png, jpg, jpeg
-        $ext = array('png', 'jpg', 'jpeg');
+        $ext = array('png', 'jpg', 'jpeg', 'jfif');
         $extFoto = pathinfo($nama_foto, PATHINFO_EXTENSION);
         
         //JIKA EXTENSI FOTO TIDAK ADA DI DAFTAR ARRAY EXT
