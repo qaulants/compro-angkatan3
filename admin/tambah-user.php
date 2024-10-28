@@ -25,7 +25,7 @@ if(isset($_POST['simpan'])){
         } else {
             //pindahkan gambar dari tmp folder ke folder yang sudah kita buat 
             move_uploaded_file($_FILES['foto']['tmp_name'], 'upload/' .$nama_foto);
-            
+        
             $insert = mysqli_query($koneksi, "INSERT INTO user (nama, email, password, foto) VALUES ('$nama', '$email', '$password', '$nama_foto')");
         }
     } else {

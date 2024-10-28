@@ -9,7 +9,7 @@
     <meta content="" name="description">
 
     <!-- Favicon -->
-   <?php include 'inc/head.php' ?>
+    <?php include 'inc/head.php' ?>
 </head>
 
 <body>
@@ -93,34 +93,42 @@
                         tabindex="0"></iframe>
                 </div>
                 <div class="col-lg-4 col-md-12 wow fadeInUp" data-wow-delay="0.5s">
-                    <form>
+                    <?php if (isset($_GET['status']) && $_GET['status'] == "success") {
+                        echo "<div class='alert alert-primary' role='alert'>Data Berhasil Dikirim</div>";
+                    } elseif (isset($_GET['status']) && $_GET['status'] == "email-sudahada") {
+                        echo "<div class='alert alert-warning' role='alert'>Email Sudah Ada</div>";
+                    }
+                    ?>
+                   
+                   
+                    <form method="POST" action="contact-controller/insert-contact.php">
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="name" placeholder="Your Name">
+                                    <input type="text" class="form-control" name="name" id="name" placeholder="Your Name" required>
                                     <label for="name">Your Name</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="email" class="form-control" id="email" placeholder="Your Email">
+                                    <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
                                     <label for="email">Your Email</label>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="subject" placeholder="Subject">
+                                    <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
                                     <label for="subject">Subject</label>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-floating">
-                                    <textarea class="form-control" placeholder="Leave a message here" id="message" style="height: 150px"></textarea>
+                                    <textarea class="form-control" placeholder="Leave a message here" name="message" id="message" style="height: 150px" required></textarea>
                                     <label for="message">Message</label>
                                 </div>
                             </div>
                             <div class="col-12">
-                                <button class="btn btn-primary w-100 py-3" type="submit">Send Message</button>
+                                <button name="send" class="btn btn-primary w-100 py-3" type="submit">Send Message</button>
                             </div>
                         </div>
                     </form>
@@ -141,7 +149,7 @@
 
 
     <!-- JavaScript Libraries -->
-   <?php include 'inc/js.php' ?>
+    <?php include 'inc/js.php' ?>
 </body>
 
 </html>
